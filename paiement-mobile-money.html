@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contribution Annuelle - Église Harriste d'Abatta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="image/icone.jpeg" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #2c5e1a;         /* Vert foncé - couleur principale */
+            --primary-light: #4a8c2d;   /* Vert plus clair */
+            --secondary: #f8c537;       /* Or - couleur secondaire */
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #e9ecef;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fafafa;
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            touch-action: manipulation;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .church-name {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .temple-name {
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #607d8b;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        /* Cartes de contribution */
+        .donation-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .option-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--primary-light);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+        
+        .option-card:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+        
+        .option-card.selected {
+            border-color: var(--primary);
+            background-color: #e8f5e9;
+            box-shadow: 0 0 0 2px rgba(44, 94, 26, 0.2);
+        }
+        
+        .option-card.selected::before {
+            transform: scaleY(1);
+            background: var(--primary);
+        }
+        
+        .option-info {
+            flex: 1;
+        }
+        
+        .option-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+        
+        .option-details {
+            font-size: 0.8rem;
+            color: #546e7a;
+            line-height: 1.4;
+        }
+        
+        .option-amount {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-left: 1rem;
+            white-space: nowrap;
+        }
+        
+        /* Section sélection */
+        .selection-section {
+            background: linear-gradient(135deg, #f5f5f6 0%, #e8f5e9 100%);
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .selection-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+        
+        .selection-title i {
+            margin-right: 0.6rem;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        
+        .selection-detail {
+            margin-bottom: 0.6rem;
+            display: flex;
+            font-size: 0.9rem;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #455a64;
+            width: 100px;
+            font-size: 0.85rem;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark);
+            flex: 1;
+        }
+        
+        /* Total à payer */
+        .total-section {
+            text-align: right;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .total-label {
+            font-size: 0.9rem;
+            color: #546e7a;
+            margin-bottom: 0.3rem;
+        }
+        
+        .total-amount {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        /* Opérateurs */
+        .operators-section {
+            margin: 2rem 0;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 0.8rem;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .operator-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+        }
+        
+        .operator-option {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .operator-option:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+        
+        .operator-option.selected {
+            border-color: var(--primary);
+            background-color: #e8f5e9;
+            box-shadow: 0 0 0 2px rgba(44, 94, 26, 0.2);
+        }
+        
+        .operator-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin: 0 auto 0.8rem;
+            display: block;
+            filter: grayscale(30%);
+            transition: filter 0.3s ease;
+        }
+        
+        .operator-option.selected .operator-logo {
+            filter: grayscale(0%);
+        }
+        
+        .operator-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .operator-fee {
+            font-size: 0.8rem;
+            color: #546e7a;
+        }
+        
+        /* Champ téléphone */
+        .phone-input {
+            margin: 1.5rem 0;
+        }
+        
+        .phone-input label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        
+        .phone-input input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid #cfd8dc;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+            -webkit-appearance: none;
+        }
+        
+        .phone-input input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 94, 26, 0.1);
+        }
+        
+        /* Boutons */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 0.8rem;
+        }
+        
+        .action-btn {
+            padding: 0.9rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
+            text-align: center;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary);
+            border: 1px solid var(--primary) !important;
+        }
+        
+        .btn-secondary:active {
+            background-color: #e8f5e9;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-primary:active {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* Confirmation */
+        .confirmation-container {
+            display: none;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .confirmation-icon {
+            width: 70px;
+            height: 70px;
+            background: #43a047;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(67, 160, 71, 0.3);
+        }
+        
+        .confirmation-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .confirmation-subtitle {
+            color: #546e7a;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .receipt {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .receipt-title {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .receipt-status {
+            background: #e8f5e9;
+            color: #43a047;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .receipt-item {
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        
+        .receipt-label {
+            font-weight: 500;
+            color: #546e7a;
+        }
+        
+        .receipt-value {
+            font-weight: 600;
+            color: var(--dark);
+            text-align: right;
+        }
+        
+        .receipt-divider {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 1.2rem 0;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 1.2rem auto 0;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 280px;
+            font-size: 0.95rem;
+        }
+        
+        .download-btn:active {
+            background: var(--primary-light);
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .download-btn i {
+            margin-right: 0.6rem;
+        }
+        
+        /* Icônes des opérateurs */
+        .operator-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .orange-money {
+            color: #FF6D00;
+        }
+        
+        .mtn-money {
+            color: #FFD600;
+        }
+        
+        .wave-money {
+            color: #00B0FF;
+        }
+        
+        /* Optimisations spécifiques mobile */
+        input, button, select, textarea {
+            font-size: 16px !important; /* Empêche le zoom sur iOS */
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            .church-name {
+                font-size: 1.3rem;
+            }
+            
+            .temple-name {
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .option-card {
+                padding: 1rem;
+            }
+            
+            .option-name {
+                font-size: 0.95rem;
+            }
+            
+            .option-amount {
+                font-size: 1.1rem;
+                margin-left: 0.8rem;
+            }
+            
+            .total-amount {
+                font-size: 1.4rem;
+            }
+            
+            .operator-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="church-name">ÉGLISE HARRISTE D'ABATTA</div>
+            <div class="temple-name">Temple le "Mont" Sinaï</div>
+            <h1>Contribution Annuelle 2025</h1>
+            <p class="subtitle">Soutenez notre communauté avec votre contribution</p>
+        </header>
+        
+        <!-- Options de contribution -->
+        <div class="donation-options">
+            <div class="option-card selected" onclick="selectOption('homme', 42000)">
+                <div class="option-info">
+                    <div class="option-name">Homme</div>
+                    <div class="option-details">30 000 FCFA (don) + 12 000 FCFA (FICOHA)</div>
+                </div>
+                <div class="option-amount">42 000 FCFA</div>
+            </div>
+            
+            <div class="option-card" onclick="selectOption('femme', 32000)">
+                <div class="option-info">
+                    <div class="option-name">Femme</div>
+                    <div class="option-details">20 000 FCFA (don) + 12 000 FCFA (FICOHA)</div>
+                </div>
+                <div class="option-amount">32 000 FCFA</div>
+            </div>
+            
+            <div class="option-card" onclick="selectOption('jeune', 16000)">
+                <div class="option-info">
+                    <div class="option-name">Jeune (14-20 ans)</div>
+                    <div class="option-details">10 000 FCFA (don) + 6 000 FCFA (FICOHA)</div>
+                </div>
+                <div class="option-amount">16 000 FCFA</div>
+            </div>
+            
+            <div class="option-card" onclick="selectOption('enfant', 7400)">
+                <div class="option-info">
+                    <div class="option-name">Enfant (0-13 ans)</div>
+                    <div class="option-details">5 000 FCFA (don) + 2 400 FCFA (FICOHA)</div>
+                </div>
+                <div class="option-amount">7 400 FCFA</div>
+            </div>
+            
+            <div class="option-card" onclick="selectOption('famille', 30000)">
+                <div class="option-info">
+                    <div class="option-name">Grande Famille</div>
+                    <div class="option-details">Contribution familiale globale</div>
+                </div>
+                <div class="option-amount">30 000 FCFA</div>
+            </div>
+        </div>
+        
+        <!-- Section de sélection -->
+        <div class="selection-section" id="selection-section">
+            <div class="selection-title">
+                <i class="fas fa-check-circle"></i>
+                Votre sélection
+            </div>
+            <div class="selection-detail">
+                <div class="detail-label">Catégorie:</div>
+                <div class="detail-value" id="selected-category">Homme</div>
+            </div>
+            <div class="selection-detail">
+                <div class="detail-label">Montant:</div>
+                <div class="detail-value" id="selected-amount">42 000 FCFA</div>
+            </div>
+            <div class="selection-detail">
+                <div class="detail-label">Détails:</div>
+                <div class="detail-value" id="selected-details">30 000 FCFA (don) + 12 000 FCFA (FICOHA)</div>
+            </div>
+        </div>
+        
+        <!-- Total à payer -->
+        <div class="total-section">
+            <div class="total-label">Total à payer</div>
+            <div class="total-amount" id="total-amount">42 100 FCFA</div>
+        </div>
+        
+        <!-- Choix de l'opérateur -->
+        <div class="operators-section">
+            <div class="section-title">Choisissez votre opérateur de paiement</div>
+            <div class="operator-options">
+                <div class="operator-option selected" onclick="selectOperator('orange', 100, this)">
+                    <img src="image/logo orange.jpg" alt="Orange Money" class="operator-logo">
+                    <div class="operator-name">Orange Money</div>
+                    <div class="operator-fee">Frais : 100 FCFA</div>
+                </div>
+                
+                <div class="operator-option" onclick="selectOperator('mtn', 100, this)">
+                    <img src="image/logomtn.jpg" alt="MTN Mobile Money" class="operator-logo">
+                    <div class="operator-name">MTN Mobile Money</div>
+                    <div class="operator-fee">Frais : 100 FCFA</div>
+                </div>
+                
+                <div class="operator-option" onclick="selectOperator('wave', 50, this)">
+                    <img src="image/logowave.jpg" alt="Wave" class="operator-logo">
+                    <div class="operator-name">Wave</div>
+                    <div class="operator-fee">Frais : 50 FCFA</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Numéro de téléphone -->
+        <div class="phone-input">
+            <label for="phone">Numéro mobile pour le paiement</label>
+            <input type="tel" id="phone" placeholder="Ex: 07 12 34 56 78" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" inputmode="numeric">
+        </div>
+        
+        <!-- Boutons d'action -->
+        <div class="action-buttons">
+            <button class="action-btn btn-secondary" onclick="changeOption()">
+                <i class="fas fa-arrow-left"></i> Modifier
+            </button>
+            <button class="action-btn btn-primary" onclick="processPayment()">
+                Payer maintenant <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+        
+        <!-- Confirmation de paiement -->
+        <div class="confirmation-container" id="confirmation-container">
+            <div class="confirmation-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="confirmation-title">Paiement validé avec succès</h2>
+            <p class="confirmation-subtitle">Merci pour votre contribution à notre communauté</p>
+            
+            <div class="receipt">
+                <div class="receipt-header">
+                    <div class="receipt-title">Reçu de paiement</div>
+                    <div class="receipt-status">Complété</div>
+                </div>
+                
+                <div class="receipt-item">
+                    <div class="receipt-label">Référence</div>
+                    <div class="receipt-value" id="receipt-ref">PAY-2025-7894</div>
+                </div>
+                <div class="receipt-item">
+                    <div class="receipt-label">Date</div>
+                    <div class="receipt-value" id="receipt-date">08/05/2025 - 15:42</div>
+                </div>
+                <div class="receipt-item">
+                    <div class="receipt-label">Montant payé</div>
+                    <div class="receipt-value" id="receipt-amount">42 100 FCFA</div>
+                </div>
+                <div class="receipt-item">
+                    <div class="receipt-label">Opérateur</div>
+                    <div class="receipt-value" id="receipt-operator">Orange Money</div>
+                </div>
+                <div class="receipt-item">
+                    <div class="receipt-label">Numéro</div>
+                    <div class="receipt-value" id="receipt-phone">07 12 34 56 78</div>
+                </div>
+                
+                <div class="receipt-divider"></div>
+                
+                <div class="receipt-item">
+                    <div class="receipt-label">Catégorie</div>
+                    <div class="receipt-value" id="receipt-category">Homme</div>
+                </div>
+                <div class="receipt-item">
+                    <div class="receipt-label">Détails</div>
+                    <div class="receipt-value" id="receipt-details">30 000 FCFA (don) + 12 000 FCFA (FICOHA)</div>
+                </div>
+            </div>
+            
+            <button class="download-btn" onclick="downloadReceipt()">
+                <i class="fas fa-download"></i> Télécharger le reçu
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let selectedOption = {
+            id: 'homme',
+            name: 'Homme',
+            amount: 42000,
+            details: '30 000 FCFA (don) + 12 000 FCFA (FICOHA)'
+        };
+        
+        let selectedOperator = {
+            id: 'orange',
+            name: 'Orange Money',
+            fee: 100
+        };
+        
+        // Sélectionner une option
+        function selectOption(id, amount) {
+            // Retirer la sélection précédente
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Ajouter la sélection à la nouvelle carte
+            event.currentTarget.classList.add('selected');
+            
+            // Déterminer les détails en fonction de l'ID
+            let name, details;
+            switch(id) {
+                case 'homme':
+                    name = 'Homme';
+                    details = '30 000 FCFA (don) + 12 000 FCFA (FICOHA)';
+                    break;
+                case 'femme':
+                    name = 'Femme';
+                    details = '20 000 FCFA (don) + 12 000 FCFA (FICOHA)';
+                    break;
+                case 'jeune':
+                    name = 'Jeune (14-20 ans)';
+                    details = '10 000 FCFA (don) + 6 000 FCFA (FICOHA)';
+                    break;
+                case 'enfant':
+                    name = 'Enfant (0-13 ans)';
+                    details = '5 000 FCFA (don) + 2 400 FCFA (FICOHA)';
+                    break;
+                case 'famille':
+                    name = 'Grande Famille';
+                    details = 'Contribution familiale globale';
+                    break;
+            }
+            
+            // Mettre à jour la sélection
+            selectedOption = { id, name, amount, details };
+            
+            // Mettre à jour l'affichage
+            document.getElementById('selected-category').textContent = name;
+            document.getElementById('selected-amount').textContent = amount.toLocaleString('fr-FR') + ' FCFA';
+            document.getElementById('selected-details').textContent = details;
+            
+            // Mettre à jour le total
+            updateTotal();
+        }
+        
+        // Sélectionner un opérateur
+        function selectOperator(id, fee, element) {
+            // Retirer la sélection précédente
+            document.querySelectorAll('.operator-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Ajouter la sélection à la nouvelle option
+            element.classList.add('selected');
+            
+            // Mettre à jour la sélection
+            selectedOperator = {
+                id,
+                name: element.querySelector('.operator-name').textContent,
+                fee
+            };
+            
+            // Mettre à jour le total
+            updateTotal();
+        }
+        
+        // Mettre à jour le total
+        function updateTotal() {
+            const total = selectedOption.amount + selectedOperator.fee;
+            document.getElementById('total-amount').textContent = total.toLocaleString('fr-FR') + ' FCFA';
+        }
+        
+        // Changer d'option
+        function changeOption() {
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById('selection-section').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Traiter le paiement
+        function processPayment() {
+            const phone = document.getElementById('phone').value;
+            
+            // Validation
+            if (!phone || !phone.match(/[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}/)) {
+                alert("Veuillez entrer un numéro valide (format: XX XX XX XX XX)");
+                return;
+            }
+            
+            // Générer une référence
+            const ref = `PAY-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+            
+            // Mettre à jour le reçu
+            document.getElementById('receipt-ref').textContent = ref;
+            document.getElementById('receipt-date').textContent = new Date().toLocaleString('fr-FR');
+            document.getElementById('receipt-amount').textContent = (selectedOption.amount + selectedOperator.fee).toLocaleString('fr-FR') + ' FCFA';
+            document.getElementById('receipt-operator').textContent = selectedOperator.name;
+            document.getElementById('receipt-phone').textContent = phone;
+            document.getElementById('receipt-category').textContent = selectedOption.name;
+            document.getElementById('receipt-details').textContent = selectedOption.details;
+            
+            // Afficher le chargement
+            const payBtn = document.querySelector('.btn-primary');
+            payBtn.disabled = true;
+            payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
+            
+            // Simuler un délai de traitement (remplacer par un vrai appel API)
+            setTimeout(() => {
+                // Afficher la confirmation
+                document.getElementById('confirmation-container').style.display = 'block';
+                payBtn.disabled = false;
+                payBtn.innerHTML = 'Payer maintenant <i class="fas fa-arrow-right"></i>';
+                
+                // Scroll vers la confirmation
+                document.getElementById('confirmation-container').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 2000);
+        }
+        
+        // Télécharger le reçu
+        function downloadReceipt() {
+            alert("Fonctionnalité de téléchargement du reçu sera implémentée ici");
+            // Pour une implémentation réelle, utiliser html2pdf.js ou une API de génération de PDF
+        }
+    </script>
+</body>
+</html>

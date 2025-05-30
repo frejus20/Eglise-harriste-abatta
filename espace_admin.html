@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Espace Admin - Église Harriste d'Abatta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="image/icone.jpeg" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #2c5e1a;
+            --primary-light: #4a8c2d;
+            --primary-lighter: #e8f5e9;
+            --secondary: #f8c537;
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #e9ecef;
+            --gray-dark: #6c757d;
+            --error: #e74c3c;
+            --success: #27ae60;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 4px 15px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        /* Page de connexion */
+        .login-container {
+            max-width: 100%;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .login-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .login-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 94, 26, 0.1);
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            border: none;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        .error-message {
+            color: var(--error);
+            margin-top: 1rem;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        /* Tableau de bord admin */
+        .admin-header {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .admin-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .admin-btn {
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+            font-size: 0.85rem;
+            flex: 1;
+        }
+
+        .logout-btn {
+            background-color: var(--error);
+            color: var(--white);
+        }
+
+        .export-btn {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            color: var(--gray-dark);
+            font-size: 0.85rem;
+        }
+
+        .members-table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .members-table th,
+        .members-table td {
+            padding: 0.8rem 0.6rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .members-table th {
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        .members-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .members-table tr:hover {
+            background-color: var(--primary-lighter);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .status-verified {
+            background-color: #e8f5e9;
+            color: var(--success);
+        }
+
+        .status-pending {
+            background-color: #fff3e0;
+            color: #ffa000;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 1rem;
+            margin: 0 0.2rem;
+            transition: var(--transition);
+            padding: 0.3rem;
+        }
+
+        .action-btn:active {
+            transform: scale(0.9);
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .search-filter-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .search-box {
+            width: 100%;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.7rem 1rem 0.7rem 2.3rem;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            -webkit-appearance: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .modal-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-dark);
+            padding: 0.2rem;
+        }
+
+        .member-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+        }
+
+        .detail-group {
+            margin-bottom: 0.8rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--gray-dark);
+            display: block;
+            margin-bottom: 0.2rem;
+            font-size: 0.85rem;
+        }
+
+        .detail-value {
+            padding: 0.5rem;
+            background-color: var(--light);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        /* Améliorations pour mobile */
+        @media (min-width: 480px) {
+            .login-container {
+                max-width: 400px;
+                padding: 2rem;
+            }
+
+            .admin-actions {
+                gap: 0.8rem;
+            }
+
+            .search-filter-container {
+                flex-direction: row;
+            }
+
+            .filter-select {
+                width: auto;
+                min-width: 180px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .admin-container {
+                padding: 1.5rem;
+            }
+
+            .admin-header {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .admin-actions {
+                width: auto;
+                flex: none;
+            }
+
+            .admin-btn {
+                padding: 0.7rem 1.2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .stat-card {
+                padding: 1.2rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .members-table th,
+            .members-table td {
+                padding: 1rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .member-details {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page de connexion -->
+    <div class="admin-container" id="loginPage">
+        <div class="login-container">
+            <img src="image/harriste.jpeg" alt="Logo Église Harriste" class="login-logo" loading="lazy">
+            <h1 class="login-title">Connexion Admin</h1>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Se connecter
+                </button>
+                
+                <div class="error-message" id="loginError">
+                    Identifiants incorrects. Veuillez réessayer.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tableau de bord admin -->
+    <div class="admin-container admin-section" id="dashboardPage">
+        <div class="admin-header">
+            <h1 class="admin-title">
+                <i class="fas fa-tachometer-alt"></i> Tableau de Bord
+            </h1>
+            <div class="admin-actions">
+                <button class="admin-btn export-btn" id="exportBtn">
+                    <i class="fas fa-file-export"></i> <span class="btn-text">Exporter</span>
+                </button>
+                <button class="admin-btn logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> <span class="btn-text">Déconnexion</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-value" id="totalMembers">0</div>
+                <div class="stat-label">Membres Totaux</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="verifiedMembers">0</div>
+                <div class="stat-label">Membres Vérifiés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="newToday">0</div>
+                <div class="stat-label">Nouveaux Aujourd'hui</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="pendingVerification">0</div>
+                <div class="stat-label">En Attente</div>
+            </div>
+        </div>
+
+        <div class="search-filter-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher un membre..." autocapitalize="off">
+            </div>
+            <select class="filter-select" id="statusFilter">
+                <option value="all">Tous les statuts</option>
+                <option value="verified">Vérifiés</option>
+                <option value="pending">En attente</option>
+            </select>
+        </div>
+
+        <h2 style="margin-bottom: 1rem; color: var(--primary); font-size: 1.2rem;">
+            <i class="fas fa-users"></i> Liste des Membres
+        </h2>
+        
+        <div class="members-table-container">
+            <table class="members-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénoms</th>
+                        <th>Téléphone</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="membersTableBody">
+                    <!-- Les membres seront ajoutés ici par JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal pour les détails du membre -->
+    <div class="modal" id="memberModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Détails du Membre</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="member-details" id="memberDetailsContent">
+                <!-- Les détails seront ajoutés ici par JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Optimisation: Utiliser des variables en cache pour les sélecteurs fréquents
+            const DOM = {
+                loginPage: document.getElementById('loginPage'),
+                dashboardPage: document.getElementById('dashboardPage'),
+                loginForm: document.getElementById('loginForm'),
+                loginError: document.getElementById('loginError'),
+                logoutBtn: document.getElementById('logoutBtn'),
+                exportBtn: document.getElementById('exportBtn'),
+                membersTableBody: document.getElementById('membersTableBody'),
+                totalMembersEl: document.getElementById('totalMembers'),
+                verifiedMembersEl: document.getElementById('verifiedMembers'),
+                newTodayEl: document.getElementById('newToday'),
+                pendingVerificationEl: document.getElementById('pendingVerification'),
+                searchInput: document.getElementById('searchInput'),
+                statusFilter: document.getElementById('statusFilter'),
+                memberModal: document.getElementById('memberModal'),
+                closeModal: document.getElementById('closeModal'),
+                memberDetailsContent: document.getElementById('memberDetailsContent')
+            };
+
+            // Identifiants admin (à remplacer par un système sécurisé en production)
+            const ADMIN_CREDENTIALS = {
+                username: "admin",
+                password: "EgliseHarriste2023" // À changer en production
+            };
+
+            // Variables globales
+            let allMembers = [];
+            let filteredMembers = [];
+
+            // Vérifier si l'utilisateur est déjà connecté
+            if (localStorage.getItem('adminAuthenticated') === 'true') {
+                showDashboard();
+                loadMembers();
+            }
+
+            // Gestion de la connexion
+            DOM.loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                    // Connexion réussie
+                    localStorage.setItem('adminAuthenticated', 'true');
+                    DOM.loginError.style.display = 'none';
+                    showDashboard();
+                    loadMembers();
+                } else {
+                    // Échec de connexion
+                    DOM.loginError.style.display = 'block';
+                }
+            });
+
+            // Gestion de la déconnexion
+            DOM.logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('adminAuthenticated');
+                showLogin();
+                DOM.loginForm.reset();
+            });
+
+            // Gestion de l'export
+            DOM.exportBtn.addEventListener('click', exportMembers);
+
+            // Gestion de la recherche avec debounce pour améliorer les performances
+            let searchTimeout;
+            DOM.searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(filterMembers, 300);
+            });
+            
+            DOM.statusFilter.addEventListener('change', filterMembers);
+
+            // Gestion du modal
+            DOM.closeModal.addEventListener('click', () => {
+                DOM.memberModal.style.display = 'none';
+            });
+
+            // Fermer le modal en cliquant à l'extérieur
+            window.addEventListener('click', (e) => {
+                if (e.target === DOM.memberModal) {
+                    DOM.memberModal.style.display = 'none';
+                }
+            });
+
+            // Afficher la page de connexion
+            function showLogin() {
+                DOM.loginPage.style.display = 'block';
+                DOM.dashboardPage.style.display = 'none';
+            }
+
+            // Afficher le tableau de bord
+            function showDashboard() {
+                DOM.loginPage.style.display = 'none';
+                DOM.dashboardPage.style.display = 'block';
+            }
+
+            // Charger les membres depuis localStorage
+            function loadMembers() {
+                const membersData = localStorage.getItem('church_members');
+                allMembers = membersData ? JSON.parse(membersData) : [];
+                
+                // Optimisation: Ajouter les champs manquants en une seule passe
+                allMembers = allMembers.map(member => ({
+                    verified: member.verified !== undefined ? member.verified : false,
+                    ...member
+                }));
+                
+                // Trier par date d'inscription (du plus récent au plus ancien)
+                allMembers.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
+                
+                // Appliquer les filtres
+                filterMembers();
+            }
+
+            // Filtrer les membres selon la recherche et le statut
+            function filterMembers() {
+                const searchTerm = DOM.searchInput.value.toLowerCase();
+                const status = DOM.statusFilter.value;
+                
+                filteredMembers = allMembers.filter(member => {
+                    // Filtrer par recherche
+                    const matchesSearch = 
+                        member.lastname.toLowerCase().includes(searchTerm) ||
+                        member.firstname.toLowerCase().includes(searchTerm) ||
+                        (member.phone && member.phone.toLowerCase().includes(searchTerm)) ||
+                        (member.email && member.email.toLowerCase().includes(searchTerm));
+                    
+                    // Filtrer par statut
+                    const matchesStatus = 
+                        status === 'all' || 
+                        (status === 'verified' && member.verified) || 
+                        (status === 'pending' && !member.verified);
+                    
+                    return matchesSearch && matchesStatus;
+                });
+                
+                // Mettre à jour les statistiques
+                updateStats();
+                
+                // Afficher les membres filtrés
+                displayMembers();
+            }
+
+            // Afficher les membres dans le tableau (optimisé pour mobile)
+            function displayMembers() {
+                // Utiliser DocumentFragment pour améliorer les performances
+                const fragment = document.createDocumentFragment();
+                const today = new Date().toISOString().split('T')[0];
+                
+                filteredMembers.forEach((member, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // Formater la date pour l'affichage
+                    const registrationDate = new Date(member.registrationDate);
+                    const formattedDate = registrationDate.toLocaleDateString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+                    
+                    // Créer la ligne du tableau optimisée pour mobile
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${escapeHtml(member.lastname)}</td>
+                        <td>${escapeHtml(member.firstname)}</td>
+                        <td>${escapeHtml(member.phone || 'N/A')}</td>
+                        <td>
+                            <span class="status-badge ${member.verified ? 'status-verified' : 'status-pending'}">
+                                ${member.verified ? 'Vérifié' : 'En attente'}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="action-btn" title="Voir les détails" onclick="showMemberDetails('${escapeHtml(JSON.stringify(member))}')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn" title="Vérifier" onclick="verifyMember(${member.id})" ${member.verified ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </td>
+                    `;
+                    
+                    fragment.appendChild(row);
+                });
+                
+                // Mettre à jour le DOM en une seule opération
+                DOM.membersTableBody.innerHTML = '';
+                DOM.membersTableBody.appendChild(fragment);
+            }
+
+            // Mettre à jour les statistiques
+            function updateStats() {
+                const today = new Date().toISOString().split('T')[0];
+                const verifiedCount = allMembers.filter(m => m.verified).length;
+                const newTodayCount = allMembers.filter(m => m.registrationDate.split('T')[0] === today).length;
+                
+                DOM.totalMembersEl.textContent = allMembers.length;
+                DOM.verifiedMembersEl.textContent = verifiedCount;
+                DOM.newTodayEl.textContent = newTodayCount;
+                DOM.pendingVerificationEl.textContent = allMembers.length - verifiedCount;
+            }
+
+            // Exporter les membres au format CSV
+            function exportMembers() {
+                // Créer le contenu CSV de manière optimisée
+                const headers = ["ID,Nom,Prénoms,Téléphone,Email,Date de Naissance,Profession,Genre,Date Inscription,Statut"];
+                const rows = filteredMembers.map((member, index) => {
+                    return [
+                        index + 1,
+                        member.lastname,
+                        member.firstname,
+                        member.phone || 'N/A',
+                        member.email || 'N/A',
+                        member.birthdate ? new Date(member.birthdate).toLocaleDateString('fr-FR') : 'N/A',
+                        member.profession || 'N/A',
+                        getGenderLabel(member.gender),
+                        new Date(member.registrationDate).toLocaleDateString('fr-FR'),
+                        member.verified ? 'Vérifié' : 'En attente'
+                    ].map(field => `"${field}"`).join(",");
+                });
+                
+                const csvContent = headers.concat(rows).join("\n");
+                
+                // Créer un blob et déclencher le téléchargement
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `membres_eglise_harriste_${new Date().toISOString().split('T')[0]}.csv`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            // Échapper les caractères HTML pour la sécurité (version optimisée)
+            function escapeHtml(unsafe) {
+                if (typeof unsafe !== 'string') return unsafe;
+                return unsafe.replace(/[&<>"']/g, function(match) {
+                    return {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#039;'
+                    }[match];
+                });
+            }
+
+            // Afficher les détails d'un membre dans le modal (optimisé pour mobile)
+            window.showMemberDetails = function(memberJson) {
+                try {
+                    const member = JSON.parse(memberJson);
+                    
+                    // Formater les dates
+                    const birthdate = member.birthdate ? new Date(member.birthdate).toLocaleDateString('fr-FR') : 'Non spécifiée';
+                    const registrationDate = new Date(member.registrationDate).toLocaleDateString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    // Créer le contenu du modal de manière optimisée
+                    DOM.memberDetailsContent.innerHTML = `
+                        <div class="detail-group">
+                            <span class="detail-label">Nom</span>
+                            <div class="detail-value">${escapeHtml(member.lastname)}</div>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Prénoms</span>
+                            <div class="detail-value">${escapeHtml(member.firstname)}</div>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Téléphone</span>
+                            <div class="detail-value">${escapeHtml(member.phone || 'Non spécifié')}</div>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Email</span>
+                            <div class="detail-value">${escapeHtml(member.email || 'Non spécifié')}</div>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Date de Naissance</span>
+                            <div class="detail-value">${birthdate}</div>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Profession</span>
+                            <div class="detail-value">${escapeHtml(member.profession || 'Non spécifiée')}</div>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Genre</span>
+                            <div class="detail-value">${getGenderLabel(member.gender)}</div>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Date Inscription</span>
+                            <div class="detail-value">${registrationDate}</div>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Statut</span>
+                            <div class="detail-value">
+                                <span class="status-badge ${member.verified ? 'status-verified' : 'status-pending'}">
+                                    ${member.verified ? 'Vérifié' : 'En attente'}
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Afficher le modal
+                    DOM.memberModal.style.display = 'flex';
+                } catch (e) {
+                    console.error('Erreur lors de l\'affichage des détails du membre:', e);
+                }
+            };
+
+            // Obtenir le libellé du genre (fonction optimisée)
+            window.getGenderLabel = function(gender) {
+                const labels = {
+                    'male': 'Homme',
+                    'female': 'Femme',
+                    'other': 'Autre'
+                };
+                return labels[gender] || 'Non spécifié';
+            };
+
+            // Vérifier un membre
+            window.verifyMember = function(memberId) {
+                if (confirm('Voulez-vous vraiment vérifier ce membre ?')) {
+                    allMembers = allMembers.map(member => 
+                        member.id === memberId ? { ...member, verified: true } : member
+                    );
+                    
+                    localStorage.setItem('church_members', JSON.stringify(allMembers));
+                    filterMembers();
+                }
+            };
+
+            // Supprimer un membre
+            window.deleteMember = function(memberId) {
+                if (confirm('Êtes-vous sûr de vouloir supprimer ce membre ? Cette action est irréversible.')) {
+                    allMembers = allMembers.filter(member => member.id !== memberId);
+                    localStorage.setItem('church_members', JSON.stringify(allMembers));
+                    filterMembers();
+                }
+            };
+        });
+    </script>
+</body>
+</html>

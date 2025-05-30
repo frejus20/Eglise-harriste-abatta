@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <title>Choix d'adhésion - Église Harriste d'Abatta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="image/icone.jpeg" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #2c5e1a;
+            --primary-light: #4a8c2d;
+            --primary-lighter: #e8f5e9;
+            --secondary: #f8c537;
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #e9ecef;
+            --gray-dark: #6c757d;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo {
+            max-width: 80px;
+            margin-bottom: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            height: auto;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .instruction {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--gray-dark);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding: 0 0.5rem;
+        }
+        
+        .options {
+            margin: 1.5rem 0;
+        }
+        
+        .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--gray);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: var(--white);
+            position: relative;
+            touch-action: manipulation;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+        
+        .option.selected {
+            border-color: var(--primary);
+            background-color: var(--primary-lighter);
+            box-shadow: 0 0 0 2px rgba(44, 94, 26, 0.1);
+        }
+        
+        .option-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary);
+            min-width: 36px;
+            text-align: center;
+        }
+        
+        .option-content h3 {
+            margin-bottom: 0.4rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .option-content p {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gray), transparent);
+            margin: 1.5rem 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            flex: 1;
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background-color: transparent;
+        }
+        
+        .btn-outline:active {
+            transform: scale(0.96);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 94, 26, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(44, 94, 26, 0.3);
+            border: none;
+        }
+        
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(44, 94, 26, 0.4);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+        
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Optimisations pour mobile */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .option {
+                padding: 1rem;
+                flex-direction: row;
+            }
+            
+            .option-icon {
+                margin-right: 0.8rem;
+                font-size: 1.3rem;
+                min-width: 32px;
+            }
+            
+            .option-content h3 {
+                font-size: 1rem;
+            }
+            
+            .option-content p {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .option {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .option-icon {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="image/harriste.jpg" alt="Logo Église Harriste" class="logo" width="80" height="80">
+            <h1>Que souhaitez-vous faire ?</h1>
+        </div>
+        
+        <div class="card">
+            <p class="instruction">
+                Si vous êtes nouveau et n'avez jamais rejoint notre communauté, choisissez "Je veux m'engager".<br>
+                Sinon, sélectionnez "Je veux payer ma contribution annuelle".
+            </p>
+            
+            <div class="options">
+                <div class="option" id="new-member" role="button" aria-pressed="false" tabindex="0">
+                    <div class="option-icon" aria-hidden="true">🙏</div>
+                    <div class="option-content">
+                        <h3>Je veux m'engager</h3>
+                        <p>Nouvelle adhésion à notre communauté spirituelle</p>
+                    </div>
+                </div>
+                
+                <div class="option" id="renewal" role="button" aria-pressed="false" tabindex="0">
+                    <div class="option-icon" aria-hidden="true">💳</div>
+                    <div class="option-content">
+                        <h3>Je veux payer ma contribution annuelle</h3>
+                        <p>Renouvellement de votre engagement spirituel</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="navigation">
+                <a href="bienvenue.html" class="btn btn-outline">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i> Précédent
+                </a>
+                <a href="#" id="next-btn" class="btn btn-primary btn-disabled">
+                    Suivant <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const newMemberOption = document.getElementById('new-member');
+            const renewalOption = document.getElementById('renewal');
+            const nextBtn = document.getElementById('next-btn');
+            
+            let selectedOption = null;
+            
+            // Gestion de la sélection d'option
+            function selectOption(option, type) {
+                selectedOption = type;
+                // Retirer toutes les sélections
+                document.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                    opt.setAttribute('aria-pressed', 'false');
+                });
+                // Ajouter la sélection
+                option.classList.add('selected');
+                option.setAttribute('aria-pressed', 'true');
+                // Activer le bouton suivant
+                nextBtn.classList.remove('btn-disabled');
+                // Définir le lien en fonction du choix
+                nextBtn.href = type === 'new' ? 'formulaire.html' : 'paiement-mobile-money.html';
+            }
+            
+            function handleOptionClick(option, type) {
+                selectOption(option, type);
+                // Feedback haptique si disponible
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(10);
+                }
+            }
+            
+            newMemberOption.addEventListener('click', function() {
+                handleOptionClick(newMemberOption, 'new');
+            });
+            
+            newMemberOption.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    handleOptionClick(newMemberOption, 'new');
+                }
+            });
+            
+            renewalOption.addEventListener('click', function() {
+                handleOptionClick(renewalOption, 'renewal');
+            });
+            
+            renewalOption.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    handleOptionClick(renewalOption, 'renewal');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

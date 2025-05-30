@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Don Spécial Annuel 2025 - Église Harriste d'Abatta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="image/icone.jpeg" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #2c5e1a;         /* Vert foncé - couleur principale */
+            --primary-light: #4a8c2d;   /* Vert plus clair */
+            --secondary: #f8c537;       /* Or - couleur secondaire */
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #e9ecef;
+            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+        }
+        
+        .church-name {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .temple-name {
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        h1 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        
+        .info-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--secondary);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-left: 3px solid var(--secondary);
+            padding-left: 0.8rem;
+        }
+        
+        .don-list {
+            margin: 1rem 0;
+        }
+        
+        .don-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            background-color: var(--light);
+            border-radius: 5px;
+        }
+        
+        .don-category {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .don-amount {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .don-details {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+        
+        .goal-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .goal-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .goal-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .goal-note {
+            font-style: italic;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        .phases-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .phase-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-top: 3px solid var(--secondary);
+        }
+        
+        .phase-date {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .phase-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .carnets-section {
+            margin: 1.5rem 0;
+        }
+        
+        .carnet-card {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 0.8rem;
+        }
+        
+        .carnet-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .carnet-icon {
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .carnet-price {
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.8rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+        
+        .btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .btn-prev {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            box-shadow: 0 4px 10px rgba(44, 94, 26, 0.2);
+        }
+
+        /* Version desktop */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 900px;
+                padding: 2rem;
+            }
+            
+            .church-name {
+                font-size: 1.8rem;
+            }
+            
+            .temple-name {
+                font-size: 1.3rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .info-card {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .don-item {
+                flex-direction: row;
+                align-items: center;
+                padding: 1rem;
+            }
+            
+            .don-category {
+                min-width: 150px;
+                margin-bottom: 0;
+            }
+            
+            .don-details {
+                margin-left: auto;
+                text-align: right;
+                margin-top: 0;
+            }
+            
+            .phases-section {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .phase-card {
+                flex: 1;
+                min-width: 250px;
+                padding: 1.5rem;
+            }
+            
+            .carnet-card {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .carnet-header {
+                margin-bottom: 0;
+                flex: 1;
+            }
+            
+            .carnet-price {
+                margin-top: 0;
+                margin-left: 1rem;
+            }
+            
+            .cta-btn {
+                width: auto;
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .btn-nav {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                flex: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="church-name">ÉGLISE DU CHRIST - MISSION HARRIS</div>
+            <div class="temple-name">ÉGLISE HARRISTE D'ABATTA - Temple le "Mont" Sinaï</div>
+            <h1>INFORMATION À DIFFUSER - DON SPÉCIAL ANNUEL 2025</h1>
+        </header>
+        
+        <div class="info-card">
+            <h2>Montant du Don Spécial Annuel 2025</h2>
+            <p>En dehors des dons ordinaires et des dons traditionnels (de Pâques et 31 décembre), le comité de gestion a initié depuis l'année dernier un DON SPECIAL ANNUEL qui est constitué du Don de nouvel an et de la Cotisation FICOHA.</p>
+            
+            <div class="don-list">
+                <div class="don-item">
+                    <span class="don-category">Homme :</span>
+                    <span class="don-amount">42 000 FCFA</span>
+                    <span class="don-details">= 30 000frs (don annuel) + 12 000frs (Ficoha)</span>
+                </div>
+                
+                <div class="don-item">
+                    <span class="don-category">Femme :</span>
+                    <span class="don-amount">32 000 FCFA</span>
+                    <span class="don-details">= 20 000frs (don annuel) + 12 000frs (Ficoha)</span>
+                </div>
+                
+                <div class="don-item">
+                    <span class="don-category">Jeune (14-20 ans) :</span>
+                    <span class="don-amount">16 000 FCFA</span>
+                    <span class="don-details">= 10 000frs (don annuel) + 6 000frs (Ficoha)</span>
+                </div>
+                
+                <div class="don-item">
+                    <span class="don-category">Enfant (0-13 ans) :</span>
+                    <span class="don-amount">7 400 FCFA</span>
+                    <span class="don-details">= 5 000frs (don annuel) + 5 000frs (Ficoha)</span>
+                </div>
+                
+                <div class="don-item">
+                    <span class="don-category">Grande Famille :</span>
+                    <span class="don-amount">30 000 FCFA</span>
+                    <span class="don-details"></span>
+                </div>
+            </div>
+            
+            <div class="goal-section">
+                <div class="goal-title">Objectif global :</div>
+                <div class="goal-amount">5 000 000 FCFA</div>
+                <div class="goal-note">(3 500 000frs pour le DON ANNUEL + 1 500 000frs pour le DON FICOHA)</div>
+            </div>
+            
+            <p><strong>Note :</strong> Ce don est particulier car il est payable selon la capacité de tout un chacun et tout au long de l'année en cours.</p>
+        </div>
+        
+        <div class="info-card">
+            <h2>Phases du Don Spécial Annuel</h2>
+            <p>Pour cette deuxième édition, LE DON SPECIAL ANNUEL aura lieu en deux phases :</p>
+            
+            <div class="phases-section">
+                <div class="phase-card">
+                    <div class="phase-date">Dimanche 08 Juin 2025</div>
+                    <div class="phase-desc">1ère phase - Dimanche de Pentecôte</div>
+                </div>
+                
+                <div class="phase-card">
+                    <div class="phase-date">Mercredi 31 Décembre 2025</div>
+                    <div class="phase-desc">2ème phase - Clôture de l'année</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h2>Carnets disponibles</h2>
+            <p>Le Comité vous présentera dans les jours à venir deux types de carnets au prix de 1000f par carnet :</p>
+            
+            <div class="carnets-section">
+                <div class="carnet-card">
+                    <div class="carnet-header">
+                        <div class="carnet-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div>Carnet de cotisation du fidèle harriste pour le paiement de toutes les différentes cotisations</div>
+                    </div>
+                    <div class="carnet-price">1000 FCFA</div>
+                </div>
+                
+                <div class="carnet-card">
+                    <div class="carnet-header">
+                        <div class="carnet-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div>Carnet de vie religieuse (pour baptême, confirmation, mariage, etc.)</div>
+                    </div>
+                    <div class="carnet-price">1000 FCFA</div>
+                </div>
+            </div>
+            
+            <p>Ces carnets en cours de fabrication seront disponibles et mis à votre disposition au plus tard fin avril.</p>
+        </div>
+        
+        <div class="cta-section">
+            <p style="margin-bottom: 1.5rem; font-size: 1rem;">Soyons tous mobilisés pour une église unie, prospère et dynamique.</p>
+            <button class="cta-btn" id="start-contribution">Commencer ma contribution</button>
+            
+            <div class="navigation">
+                <a href="index.html" class="btn-nav btn-prev">
+                    <i class="fas fa-arrow-left"></i> Précédent
+                </a>
+                <a href="paiement.html" class="btn-nav btn-next">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Que DIEU nous vienne en aide !</p>
+            <p style="margin-top: 1rem;">INFORMATION À DIFFUSER CHAQUE DIMANCHE - Temple le "Mont" Sinaï</p>
+        </footer>
+    </div>
+
+    <!-- Section de cotisation (cachée initialement) -->
+    <div id="contribution-section" class="hidden">
+        <!-- Ici vous intégrerez votre formulaire de cotisation existant -->
+        <!-- ... -->
+    </div>
+
+    <script>
+        document.getElementById('start-contribution').addEventListener('click', function() {
+            // Masquer la section d'information
+            document.querySelector('.container').classList.add('hidden');
+            
+            // Afficher la section de cotisation
+            document.getElementById('contribution-section').classList.remove('hidden');
+            
+            // Faire défiler vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

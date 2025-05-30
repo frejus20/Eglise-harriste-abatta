@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <title>Inscription - Église Harriste d'Abatta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="image/icone.jpeg" type="image/x-icon">
+    <style>
+        :root {
+            --primary: #2c5e1a;
+            --primary-light: #4a8c2d;
+            --primary-lighter: #e8f5e9;
+            --secondary: #f8c537;
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #e9ecef;
+            --gray-dark: #6c757d;
+            --error: #e74c3c;
+            --success: #27ae60;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo {
+            max-width: 80px;
+            margin-bottom: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            height: auto;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--gray-dark);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        
+        .required:after {
+            content: " *";
+            color: var(--error);
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+            -webkit-appearance: none;
+            touch-action: manipulation;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(44, 94, 26, 0.1);
+        }
+        
+        .phone-input {
+            display: flex;
+            align-items: center;
+        }
+        
+        .phone-prefix {
+            padding: 0.8rem;
+            background-color: var(--gray);
+            border: 1px solid var(--gray);
+            border-radius: 8px 0 0 8px;
+            font-size: 1rem;
+        }
+        
+        .phone-number {
+            flex: 1;
+            border-radius: 0 8px 8px 0;
+            border-left: none;
+        }
+        
+        .date-group {
+            display: flex;
+            gap: 0.8rem;
+        }
+        
+        .date-field {
+            flex: 1;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin: 1.5rem 0;
+        }
+        
+        .checkbox-group input {
+            margin-right: 0.8rem;
+            min-width: 18px;
+            min-height: 18px;
+            margin-top: 0.2rem;
+            touch-action: manipulation;
+        }
+        
+        .checkbox-group label {
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+        
+        .diaspora-note {
+            font-size: 0.8rem;
+            color: var(--gray-dark);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            gap: 0.8rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            flex: 1;
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background-color: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(44, 94, 26, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(44, 94, 26, 0.3);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 6px 16px rgba(44, 94, 26, 0.4);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+        
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .success-message {
+            color: var(--success);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-container {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .success-container h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .success-container p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .admin-link {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .admin-link:active {
+            transform: scale(0.96);
+        }
+
+        .admin-link:hover {
+            background: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(44, 94, 26, 0.2);
+        }
+
+        .loader {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Optimisations pour mobile */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .date-group {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .admin-link {
+                top: 10px;
+                right: 10px;
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="number"],
+            input[type="password"],
+            select {
+                padding: 0.7rem 0.9rem;
+                font-size: 0.95rem;
+            }
+            
+            .phone-prefix {
+                padding: 0.7rem;
+                font-size: 0.95rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .checkbox-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .checkbox-group input {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="espace_admin.html" class="admin-link" id="adminLink">
+        <i class="fas fa-lock"></i> Admin
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <img src="image/harriste.jpg" alt="Logo Église Harriste" class="logo" width="80" height="80">
+            <h1>Formulaire d'Inscription</h1>
+            <p class="subtitle">Ces informations apparaîtront sur votre Carte de Membre</p>
+        </div>
+        
+        <div class="card">
+            <form id="registrationForm">
+                <!-- Section principale du formulaire -->
+                <div id="mainFormSection">
+                    <div class="form-group">
+                        <label for="lastname" class="required">Nom de Famille</label>
+                        <input type="text" id="lastname" name="lastname" placeholder="Votre nom de famille" required>
+                        <div class="error-message" id="lastname-error">Veuillez entrer votre nom de famille</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="firstname" class="required">Prénoms</label>
+                        <input type="text" id="firstname" name="firstname" placeholder="Vos prénoms" required>
+                        <div class="error-message" id="firstname-error">Veuillez entrer vos prénoms</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <div class="phone-input">
+                            <span class="phone-prefix">+225</span>
+                            <input type="tel" id="phone" name="phone" class="phone-number" placeholder="Votre numéro" required
+                                   inputmode="numeric" pattern="[0-9]{10}" maxlength="10">
+                        </div>
+                        <div class="error-message" id="phone-error">Veuillez entrer un numéro valide (10 chiffres)</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="required">Adresse E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Votre adresse e-mail" required
+                               inputmode="email">
+                        <div class="error-message" id="email-error">Veuillez entrer une adresse e-mail valide</div>
+                        <div class="diaspora-note">OBLIGATOIRE POUR LES MEMBRES DE LA DIASPORA</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Date de naissance</label>
+                        <div class="date-group">
+                            <div class="date-field">
+                                <label for="day">Jour</label>
+                                <input type="number" id="day" name="day" placeholder="JJ" min="1" max="31" required
+                                       inputmode="numeric" maxlength="2">
+                            </div>
+                            <div class="date-field">
+                                <label for="month">Mois</label>
+                                <select id="month" name="month" required>
+                                    <option value="">Mois</option>
+                                    <option value="01">Janvier</option>
+                                    <option value="02">Février</option>
+                                    <option value="03">Mars</option>
+                                    <option value="04">Avril</option>
+                                    <option value="05">Mai</option>
+                                    <option value="06">Juin</option>
+                                    <option value="07">Juillet</option>
+                                    <option value="08">Août</option>
+                                    <option value="09">Septembre</option>
+                                    <option value="10">Octobre</option>
+                                    <option value="11">Novembre</option>
+                                    <option value="12">Décembre</option>
+                                </select>
+                            </div>
+                            <div class="date-field">
+                                <label for="year">Année</label>
+                                <input type="number" id="year" name="year" placeholder="AAAA" min="1900" max="2023" required
+                                       inputmode="numeric" maxlength="4">
+                            </div>
+                        </div>
+                        <div class="error-message" id="birthdate-error">Veuillez entrer une date valide</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profession">Profession</label>
+                        <input type="text" id="profession" name="profession" placeholder="Votre profession">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender" class="required">Genre</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="male">Homme</option>
+                            <option value="female">Femme</option>
+                            <option value="other">Autre</option>
+                        </select>
+                        <div class="error-message" id="gender-error">Veuillez sélectionner votre genre</div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="notifications" name="notifications" checked>
+                        <label for="notifications">J'accepte de recevoir des messages de l'Église Harriste concernant des informations spirituelles et communautaires.</label>
+                    </div>
+                    
+                    <div class="navigation">
+                        <a href="paiement.html" class="btn btn-outline">
+                            <i class="fas fa-arrow-left"></i> Précédent
+                        </a>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span>S'enregistrer</span>
+                            <div class="loader" id="loader"></div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Message de succès -->
+                <div class="success-container" id="successContainer">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Inscription réussie !</h2>
+                    <p>Merci pour votre inscription. Vos informations ont bien été enregistrées.</p>
+                    <button class="btn btn-primary" id="returnBtn">Retour</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const mainFormSection = document.getElementById('mainFormSection');
+            const successContainer = document.getElementById('successContainer');
+            const submitBtn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+            const returnBtn = document.getElementById('returnBtn');
+            
+            // Initialiser le stockage des membres s'il n'existe pas
+            if (!localStorage.getItem('church_members')) {
+                localStorage.setItem('church_members', JSON.stringify([]));
+            }
+            
+            // Soumission du formulaire
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    // Afficher le loader
+                    submitBtn.querySelector('span').style.display = 'none';
+                    loader.style.display = 'block';
+                    submitBtn.disabled = true;
+                    
+                    // Simuler un délai d'enregistrement
+                    setTimeout(() => {
+                        // Enregistrer le membre
+                        const memberData = {
+                            id: Date.now(),
+                            lastname: document.getElementById('lastname').value,
+                            firstname: document.getElementById('firstname').value,
+                            phone: '+225' + document.getElementById('phone').value,
+                            email: document.getElementById('email').value,
+                            birthdate: `${document.getElementById('year').value}-${document.getElementById('month').value}-${document.getElementById('day').value}`,
+                            profession: document.getElementById('profession').value,
+                            gender: document.getElementById('gender').value,
+                            notifications: document.getElementById('notifications').checked,
+                            registrationDate: new Date().toISOString()
+                        };
+                        
+                        saveMember(memberData);
+                        
+                        // Afficher le message de succès
+                        mainFormSection.style.display = 'none';
+                        successContainer.style.display = 'block';
+                        
+                        // Réinitialiser le loader
+                        submitBtn.querySelector('span').style.display = 'inline';
+                        loader.style.display = 'none';
+                        submitBtn.disabled = false;
+                        
+                        // Feedback haptique si disponible
+                        if ('vibrate' in navigator) {
+                            navigator.vibrate([100, 50, 100]);
+                        }
+                    }, 1500);
+                }
+            });
+            
+            // Retour au formulaire après inscription
+            returnBtn.addEventListener('click', function() {
+                successContainer.style.display = 'none';
+                mainFormSection.style.display = 'block';
+                form.reset();
+                
+                // Feedback haptique si disponible
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(50);
+                }
+            });
+            
+            // Fonctions utilitaires
+            function validateForm() {
+                let isValid = true;
+                const requiredFields = [
+                    { id: 'lastname', error: 'lastname-error' },
+                    { id: 'firstname', error: 'firstname-error' },
+                    { id: 'phone', error: 'phone-error' },
+                    { id: 'email', error: 'email-error' },
+                    { id: 'day', error: 'birthdate-error' },
+                    { id: 'month', error: 'birthdate-error' },
+                    { id: 'year', error: 'birthdate-error' },
+                    { id: 'gender', error: 'gender-error' }
+                ];
+                
+                // Réinitialiser les erreurs
+                document.querySelectorAll('.error-message').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Valider chaque champ
+                requiredFields.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    if (!input.value) {
+                        showError(field.error, 'Ce champ est obligatoire');
+                        isValid = false;
+                    }
+                });
+                
+                // Validation spécifique pour l'email
+                const email = document.getElementById('email').value;
+                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showError('email-error', 'Veuillez entrer une adresse email valide');
+                    isValid = false;
+                }
+                
+                // Validation du téléphone
+                const phone = document.getElementById('phone').value;
+                if (phone && !/^[0-9]{10}$/.test(phone)) {
+                    showError('phone-error', 'Veuillez entrer un numéro valide (10 chiffres)');
+                    isValid = false;
+                }
+                
+                // Validation de la date
+                const day = parseInt(document.getElementById('day').value);
+                const month = document.getElementById('month').value;
+                const year = parseInt(document.getElementById('year').value);
+                
+                if (day && month && year) {
+                    const date = new Date(year, parseInt(month) - 1, day);
+                    if (isNaN(date.getTime())) {
+                        showError('birthdate-error', 'Date de naissance invalide');
+                        isValid = false;
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            function showError(id, message) {
+                const errorElement = document.getElementById(id);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+                
+                // Feedback haptique si disponible
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(200);
+                }
+            }
+            
+            function saveMember(member) {
+                const members = JSON.parse(localStorage.getItem('church_members'));
+                members.push(member);
+                localStorage.setItem('church_members', JSON.stringify(members));
+            }
+            
+            // Auto-avancement des champs de date
+            document.getElementById('day').addEventListener('input', function() {
+                if (this.value.length === 2) {
+                    document.getElementById('month').focus();
+                }
+            });
+            
+            document.getElementById('month').addEventListener('change', function() {
+                if (this.value) {
+                    document.getElementById('year').focus();
+                }
+            });
+            
+            // Empêcher les caractères non numériques dans les champs numériques
+            document.getElementById('phone').addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+            
+            document.getElementById('day').addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+            
+            document.getElementById('year').addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        });
+    </script>
+</body>
+</html>

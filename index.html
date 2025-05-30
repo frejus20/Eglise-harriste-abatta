@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mont Sinaï d'Abatta - Accueil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c5e1a;
+            --primary-light: #4a8c2d;
+            --secondary: #f8c537;
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .hero-container {
+            display: flex;
+            flex-direction: column-reverse; /* Modifié pour mobile */
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .content-section {
+            flex: 1;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--white);
+            z-index: 2;
+            order: 2;
+        }
+        
+        .image-section {
+            flex: 1; /* Modifié */
+            min-height: 50vh; /* Nouvelle propriété */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            order: 1;
+            background-color: var(--primary); /* Fond de secours */
+        }
+        
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Modifié */
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #555;
+        }
+        
+        .divider {
+            height: 3px;
+            width: 60px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .help-section {
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+        
+        .help-icon {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .help-text {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(44, 94, 26, 0.2);
+            max-width: fit-content;
+            margin: 0 auto;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            box-shadow: 0 6px 20px rgba(44, 94, 26, 0.3);
+        }
+        
+        .btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        .image-caption {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            padding: 0 1rem;
+            font-size: 0.9rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem;
+            border-radius: 5px;
+            width: 90%;
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .image-caption a {
+            text-decoration: none;
+            color: var(--primary);
+            display: inline-block;
+            margin-top: 0.3rem;
+        }
+
+        /* Version desktop */
+        @media (min-width: 768px) {
+            .hero-container {
+                flex-direction: row;
+            }
+            
+            .content-section {
+                padding: 3rem;
+                order: 1;
+                flex: 1;
+            }
+            
+            .image-section {
+                height: auto;
+                order: 2;
+                flex: 1;
+                justify-content: center;
+                min-height: auto;
+            }
+            
+            .image-section img {
+                object-fit: cover; /* Retour à cover pour desktop */
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+                text-align: left;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+                text-align: left;
+                max-width: 500px;
+            }
+            
+            .divider {
+                margin: 2rem 0;
+            }
+            
+            .help-section {
+                justify-content: flex-start;
+            }
+            
+            .btn {
+                margin: 0;
+            }
+            
+            .image-caption {
+                position: absolute;
+                bottom: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .content-section {
+                padding: 4rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+                max-width: 600px;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+                max-width: 600px;
+            }
+        }
+
+        /* Optimisation pour très petits écrans */
+        @media (max-width: 400px) {
+            .image-section {
+                min-height: 40vh;
+                max-height: 60vh;
+            }
+            
+            .image-caption {
+                font-size: 0.8rem;
+                padding: 0.3rem;
+                bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-container">        
+        <div class="content-section">
+            <h1>Bienvenue au Mont Sinaï d'Abatta</h1>
+            
+            <p class="tagline">
+                Vous êtes au bon endroit si vous souhaitez rejoindre notre communauté spirituelle 
+                ou renouveler votre engagement. À la fin du processus, vous pourrez générer 
+                automatiquement votre carte de Membre.
+            </p>
+            
+            <div class="divider"></div>
+            
+            <div class="help-section">
+                <i class="fas fa-question-circle help-icon"></i>
+                <span class="help-text">Besoin d'aide ?</span>
+            </div>
+            
+            <a href="bienvenue.html" class="btn">
+                Démarrer
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <div class="image-section">
+            <img src="image/sup.jpg" alt="Mont Sinaï d'Abatta" loading="lazy">
+            <div class="image-caption">
+                REV.PREDICATEUR SUPERIEUR DANHO AKOSSI MATURIN<br>
+                <a href="https://www.facebook.com/Mont Sinaï D'abatta" target="_blank">Suivez-nous sur Facebook</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
